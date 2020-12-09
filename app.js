@@ -3,7 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const _ = require("lodash");
+const lodash = require("lodash");
 const port = process.env.PORT || 3000;
 const cl = console.log
 
@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://samir:samir1234@cluster0.armcw.mongodb.net/todolist?retryWrites=true&w=majority", {useNewUrlParser: true,useUnifiedTopology: true, useFindAndModify: true}).then((conn)=> cl('Mongo DB  connected successfully '+ conn.connection.host )).catch((e) => cl('Erroor Connecting'));
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopology: true, useFindAndModify: true}).then((conn)=> cl('Mongo DB  connected successfully '+ conn.connection.host )).catch((e) => cl('Erroor Connecting'));
 
 const itemsSchema = {
   name: String
@@ -66,7 +66,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/:customListName", function(req, res){
-  const customListName = _.capitalize(req.params.customListName);
+  const customListName = lodash.capitalize(req.params.customListName);
 
   List.findOne({name: customListName}, function(err, foundList){
     if (!err){
@@ -136,5 +136,5 @@ app.post("/delete", function(req, res){
 
 
 app.listen(port, function() {
-  console.log("Server started on port 3000");
+  console.log("Server started on port " + port);
 });
