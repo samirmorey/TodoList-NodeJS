@@ -59,11 +59,15 @@ app.get("/", function(req, res) {
       });
       res.redirect("/");
     } else {
-      res.render("list", {listTitle: "Today", newListItems: foundItems});
+      res.render("list", {listTitle: "Today", newListItems: foundItems,linktobeserved: '/about', linkName: 'About Me'})
     }
   });
 
 });
+
+app.get('/about',(req,res)=> {
+  res.render('about',{listTitle: 'About',linktobeserved: '/', linkName: 'Back To Home'})
+})
 
 app.get("/:customListName", function(req, res){
   const customListName = lodash.capitalize(req.params.customListName);
@@ -81,7 +85,7 @@ app.get("/:customListName", function(req, res){
       } else {
         //Show an existing list
 
-        res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+        res.render("list", {listTitle: foundList.name, newListItems: foundList.items,linktobeserved: '/about', linkName: 'About Me'});
       }
     }
   });

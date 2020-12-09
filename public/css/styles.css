@@ -10,6 +10,29 @@ h1 {
   padding: 10px;
 }
 
+.flex{
+  display: flex; 
+  justify-content: center;
+   align-items: center; 
+   flex-direction: column;
+   text-align: center;
+}
+
+.profile-pic{
+  border-radius: 50%;
+   object-fit: cover;
+}
+.about{
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.nametitle{
+  padding: 10px 0px;
+}
+
 .box {
   max-width: 400px;
   margin: 50px auto;
