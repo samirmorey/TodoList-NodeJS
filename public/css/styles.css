@@ -156,7 +156,9 @@ footer {
   display: inline-block;
   width: 300px;
   background-color: white;
-  margin-left: 30rem;
+  margin: auto 460px;
+  border-radius: 20px;
+  text-align: center;
 }
 .btn:hover {
   background: #b1b3bd;
