@@ -1,5 +1,5 @@
 <%- include("header") -%>
-
+<a class="about box" id="heading" href="/logout">Log out</a>
   <div class="box" id="heading">
     <h1> <%= listTitle %> </h1>
   </div>
@@ -15,6 +15,7 @@
         <p><%=item.name%></p>
       </div>
       <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+
     </form>
   <%  }) %>
 
