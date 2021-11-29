@@ -116,6 +116,10 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .login-box {
@@ -161,7 +165,7 @@ footer {
   text-align: center;
 }
 .btn:hover {
-  background: #b1b3bd;
+  background: #cccfe0;
 }
 
 .success {
