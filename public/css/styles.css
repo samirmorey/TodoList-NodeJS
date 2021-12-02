@@ -135,12 +135,16 @@ footer {
     #aefcec 50%
   ); */
   max-width: 400px;
-  margin: 50px auto;
+  margin: auto;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
   height: 2.5rem;
   color: #fff;
   text-align: center;
+  display: flex;
+  position: relative;
+  top: 2rem;
+  /* flex-direction: column; */
 }
 
 .item-login {
@@ -160,9 +164,12 @@ footer {
   display: inline-block;
   width: 300px;
   background-color: white;
-  margin: auto 460px;
+  margin: auto;
   border-radius: 20px;
   text-align: center;
+  display: flex;
+  position: relative;
+  top: 5rem;
 }
 .btn:hover {
   background: #cccfe0;
