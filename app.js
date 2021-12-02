@@ -142,28 +142,45 @@ app.get(
   }
 );
 
-app.get("/list", ensureAuth, function (req, res) {
-  // res.send("hello there");
-  Item.find({}, function (err, foundItems) {
-    if (foundItems.length === 0) {
-      Item.insertMany(defaultItems, function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Successfully savevd default items to DB.");
-        }
-      });
-      res.redirect("/");
-    } else {
-      res.render("list", {
-        listTitle: "list",
-        newListItems: foundItems,
-        linktobeserved: "/about",
-        linkName: "About Me",
-        // userid: req.user.id,
-      });
-    }
-  });
+app.get("/list", ensureAuth, async function (req, res) {
+  const mylist = await List.find({
+    name: "list",
+    user: req.user.id,
+  }).lean();
+  if (mylist.length !== 0 && mylist[0].items.length !== 0) {
+    res.render("list", {
+      listTitle: mylist[0].name,
+      newListItems: mylist[0].items,
+      linktobeserved: "/about",
+      linkName: "About Me",
+    });
+  } else {
+    res.render("list", {
+      listTitle: "list",
+      newListItems: defaultItems,
+      linktobeserved: "/about",
+      linkName: "About Me",
+    });
+  }
+  // Item.find({}, function (err, foundItems) {
+  //   if (foundItems.length === 0) {
+  //     Item.insertMany(defaultItems, function (err) {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         console.log("Successfully savevd default items to DB.");
+  //       }
+  //     });
+  //     res.redirect("/");
+  //   } else {
+  //     res.render("list", {
+  //       listTitle: "list",
+  //       newListItems: foundItems,
+  //       linktobeserved: "/about",
+  //       linkName: "About Me",
+  //     });
+  //   }
+  // });
 });
 
 app.get("/about", ensureAuth, (req, res) => {
@@ -234,8 +251,9 @@ app.post("/", ensureAuth, async function (req, res) {
 app.post("/delete", ensureAuth, function (req, res) {
   const checkedItemId = req.body.checkbox;
   const listName = req.body.listName;
+  console.log(checkedItemId, listName);
   List.findOneAndUpdate(
-    { name: listName },
+    { name: listName, user: req.user.id },
     { $pull: { items: { _id: checkedItemId } } },
     function (err, foundList) {
       res.redirect("/" + listName);
