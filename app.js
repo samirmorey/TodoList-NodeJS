@@ -76,8 +76,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL:
-        "https://todolist-nodejs-mongoose.herokuapp.com/auth/google/callback",
+      callbackURL: "http://localhost:3000/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       const newUser = {
